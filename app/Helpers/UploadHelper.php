@@ -28,4 +28,30 @@ class UploadHelper
         }
         return Storage::delete($result);
     }
+
+    public static function saveBase64Image($base64_string, $folderName)
+    {
+
+        if (strpos($base64_string, 'data:image/jpeg;base64,') !== false) {
+            $image = str_replace('data:image/jpeg;base64,', '', $base64_string);
+            $extension = 'jpeg';
+        } else if (strpos($base64_string, 'data:image/png;base64,') !== false) {
+            $image = str_replace('data:image/png;base64,', '', $base64_string);
+            $extension = 'png';
+        } else if (strpos($base64_string, 'data:image/gif;base64,') !== false) {
+            $image = str_replace('data:image/gif;base64,', '', $base64_string);
+            $extension = 'gif';
+        } else {
+            // formato no soportado
+            return null;
+        }
+        // $image = str_replace('data:image/png;base64,', '', $base64_string);
+        $image = str_replace(' ', '+', $image);
+        $imageName = Str::random(40) . '.' . $extension;
+        $path = $folderName . '/' . $imageName;
+        Storage::disk('public')->put($path, base64_decode($image));
+
+        return $path;
+    }
+
 }

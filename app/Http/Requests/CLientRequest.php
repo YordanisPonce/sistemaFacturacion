@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\UploadHelper;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CLientRequest extends FormRequest
@@ -24,5 +25,10 @@ class CLientRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge(['logo' => UploadHelper::saveBase64Image($this->input('logo'), 'enterprises')]);
     }
 }

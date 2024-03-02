@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\UploadHelper;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
@@ -27,8 +28,8 @@ class EnterpriseRequest extends FormRequest
         ];
     }
 
-   /*  protected function prepareForValidation()
+    protected function prepareForValidation()
     {
-        $this->merge(['slug' => Str::slug($this->name)]);
-    } */
+        $this->merge(['logo' => UploadHelper::saveBase64Image($this->input('logo'), 'enterprises')]);
+    }
 }

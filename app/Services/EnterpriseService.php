@@ -35,7 +35,7 @@ class EnterpriseService
             'slug' => Str::slug($business->name),
             'user_id' => auth()->id(),
         ]);
-        return ResponseHelper::ok('Empresa creada satisfactoriamente', $this->findById($enterprise->id));
+        return ResponseHelper::ok('Empresa creada satisfactoriamente', $this->repository->findById($enterprise->id));
     }
 
     public function update(array $attributes, $id): JsonResponse
