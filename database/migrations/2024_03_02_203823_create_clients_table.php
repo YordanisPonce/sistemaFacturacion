@@ -13,8 +13,8 @@ return new class extends Migration {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('enterprise_id');
-            $table->unsignedBigInteger('business_id');
-            //  $table->foreign('business_id')->references('id')->on('business')->cascadeOnDelete();
+            $table->unsignedBigInteger('business_id')->nullable();
+            $table->foreign('business_id')->references('id')->on('business')->cascadeOnDelete();
             $table->timestamps();
         });
     }

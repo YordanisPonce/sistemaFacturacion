@@ -10,13 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('enterprises', function (Blueprint $table) {
+        Schema::create('taxes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('business_id')->nullable();
-            $table->foreign('business_id')->references('id')->on('business')->cascadeOnDelete();
-            $table->string('slug')->nullable();
-            $table->string('coin')->nullable();
-            $table->text('description')->nullable();
+            $table->double('percentage')->default(0);
+            $table->string('name')->nullable();
+            $table->unsignedBigInteger('enterprise_id');
+            $table->foreign('enterprise_id')->references('id')->on('enterprises');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('enterprises');
+        Schema::dropIfExists('taxes');
     }
 };

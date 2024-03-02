@@ -27,3 +27,9 @@ Route::group(
     ],
     base_path('routes/api/clients.php')
 );
+Route::group(
+    [
+        'prefix' => '/enterprises'
+    ],
+    base_path('routes/api/enterprises.php')
+);

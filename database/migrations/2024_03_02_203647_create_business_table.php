@@ -11,11 +11,13 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('business', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->string('address')->nullable();
             $table->string('logo')->nullable();
             $table->string('phone')->nullable();
             $table->string('dni')->nullable();
+            $table->timestamps();
         });
     }
 

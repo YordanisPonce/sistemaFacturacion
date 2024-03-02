@@ -27,6 +27,11 @@ class RepositoryServiceProvider extends ServiceProvider
 			\App\Interfaces\EloquentBusinessRepositoryInterface::class,
 			\App\Repositories\EloquentBusinessRepository::class
 		);
+
+		$this->app->bind(
+			\App\Interfaces\EloquentEnterpriseRepositoryInterface::class,
+			\App\Repositories\EloquentEnterpriseRepository::class
+		);
     }
 
     /**

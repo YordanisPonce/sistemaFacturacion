@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\EloquentClientRepositoryInterface;
-use App\Models\Client;
+use App\Interfaces\EloquentEnterpriseRepositoryInterface;
+use App\Models\Enterprise;
 
-class EloquentClientRepository implements EloquentClientRepositoryInterface
+class EloquentEnterpriseRepository implements EloquentEnterpriseRepositoryInterface
 {
 
-  public function __construct(private readonly Client $model)
+  public function __construct(private readonly Enterprise $model)
   {
   }
 
@@ -29,13 +29,14 @@ class EloquentClientRepository implements EloquentClientRepositoryInterface
 
   public function save(array $attributes)
   {
-    $client = $this->model->newQuery()->create($attributes);
-    return $this->findById($client->id);
+    return $this->model->newQuery()->create(collect($attributes)->only(($this->model->getFillable()))->toArray());
   }
 
   public function update(array $attributes, $id)
   {
-    return $this->findById($id)->update($attributes);
+    $model = $this->findById($id);
+    $model->update($attributes);
+    return $model->refresh();
   }
 
   public function delete($id)

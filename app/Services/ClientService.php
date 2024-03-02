@@ -27,10 +27,10 @@ class ClientService
 
     public function save(array $attributes): JsonResponse
     {
-
-        
-        $client = $this->repository->save($attributes);
-        $client->business()->create($attributes);
+        $business = $this->businessRepository->save($attributes);
+        $client = $this->repository->save($attributes + [
+            'business_id' => $business->id
+        ]);
 
         return ResponseHelper::ok('Cliente creado satisfactoriamente', $client);
     }
@@ -40,6 +40,7 @@ class ClientService
         $client = $this->repository->findById($id);
         throw_if(!$client, 'No se encuentra cliente con el identificador proporcionado');
         $client->update($attributes);
+        $client->business->fill($attributes)->save();
         return ResponseHelper::ok('Cliente actualizado satisfactoriamente', $this->repository->findById($id));
     }
 
@@ -47,7 +48,8 @@ class ClientService
     {
         $client = $this->repository->findById($id);
         throw_if(!$client, 'No se encuentra cliente con el identificador proporcionado');
-        $client->delete($id);
+        $client->business->delete();
+        $client->delete();
         return ResponseHelper::ok('Cliente eliminado satisfactoriamente');
     }
 }
