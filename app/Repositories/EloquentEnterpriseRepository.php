@@ -14,7 +14,7 @@ class EloquentEnterpriseRepository implements EloquentEnterpriseRepositoryInterf
 
   public function findAll()
   {
-    return $this->model->newQuery()->get();
+    return auth()->user()->enterprises;;
   }
 
   public function findById($id)

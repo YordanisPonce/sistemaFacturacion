@@ -33,6 +33,7 @@ class EnterpriseService
         $enterprise = $this->repository->save($attributes + [
             'business_id' => $business->id,
             'slug' => Str::slug($business->name),
+            'user_id' => auth()->id(),
         ]);
         return ResponseHelper::ok('Empresa creada satisfactoriamente', $this->findById($enterprise->id));
     }

@@ -13,7 +13,9 @@ return new class extends Migration {
         Schema::create('enterprises', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('business_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('business_id')->references('id')->on('business')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('slug')->nullable();
             $table->string('coin')->nullable();
             $table->text('description')->nullable();

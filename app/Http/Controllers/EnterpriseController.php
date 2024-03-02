@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\EnterpriseRequest;
 use App\Services\EnterpriseService;
+use Illuminate\Http\Request;
+
+;
+use Illuminate\Support\Facades\Log;
 
 class EnterpriseController extends Controller
 {
 
     public function __construct(private readonly EnterpriseService $service)
     {
-     //   $this->middleware('auth:sanctum');
+         $this->middleware('auth:sanctum');
     }
     /**
      * Display a listing of the resource.
