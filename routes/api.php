@@ -20,3 +20,10 @@ Route::group(
     ],
     base_path('routes/api/auth.php')
 );
+
+Route::group(
+    [
+        'prefix' => '/clients'
+    ],
+    base_path('routes/api/clients.php')
+);
