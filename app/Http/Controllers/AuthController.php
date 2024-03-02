@@ -8,8 +8,12 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Services\AuthService;
-use Illuminate\Http\Request;
 
+/**
+ * @OA\Info(title="Authentication", version="1.0")
+ *
+ * @OA\Server(url="http://localhost:8000")
+ */
 class AuthController extends Controller
 {
     public function __construct(private readonly AuthService $service)
@@ -17,6 +21,28 @@ class AuthController extends Controller
         $this->middleware("auth:sanctum", ["only" => ["profile", "logout"]]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/auth/login",
+     *     summary="Login",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/LoginRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Accesso al sistema"
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Correo o contraseña errónea"
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     * )
+     */
     public function login(LoginRequest $request)
     {
         try {
@@ -27,6 +53,24 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/auth/register",
+     *     summary="Register",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/RegisterRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Registro completado satisfactoriamente"
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error a la hora de completar el registro"
+     *     )
+     * )
+     */
     public function register(RegisterRequest $request)
     {
         try {

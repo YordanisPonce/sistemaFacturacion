@@ -3,9 +3,40 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidatesWhenResolvedTrait;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 
+/**
+ * @OA\Schema(
+ *     title="LoginRequest",
+ *     description="Request body parameters for login",
+ *     required={"email", "password"}
+ * )
+ */
 class LoginRequest extends FormRequest
 {
+
+    /**
+     * @OA\Property(
+     *     description="User's email",
+     *     example="admin@admin.com"
+     * )
+     *
+     * @var string
+     */
+    public $email;
+
+    /**
+     * @OA\Property(
+     *     description="User's password",
+     *     example="Admin*.100"
+     * )
+     *
+     * @var string
+     */
+    public $password;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -45,4 +76,7 @@ class LoginRequest extends FormRequest
             'password.min' => "La :attribute  debe contenter minimop 8 caracteres",
         ];
     }
+
+
+
 }

@@ -1,0 +1,117 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Authentication",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "summary": "Login",
+                "operationId": "8dcb70df1020986038d098cc08d05dae",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Accesso al sistema"
+                    },
+                    "403": {
+                        "description": "Correo o contraseña errónea"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "summary": "Register",
+                "operationId": "d764dd091cc4494ae0baf360b03319f3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Registro completado satisfactoriamente"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error a la hora de completar el registro"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "LoginRequest": {
+                "title": "LoginRequest",
+                "description": "Request body parameters for login",
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "User's email",
+                        "type": "string",
+                        "example": "admin@admin.com"
+                    },
+                    "password": {
+                        "description": "User's password",
+                        "type": "string",
+                        "example": "Admin*.100"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterRequest": {
+                "title": "RegisterRequest",
+                "description": "Request body parameters for register",
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "User's name",
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "email": {
+                        "description": "User's email",
+                        "type": "string",
+                        "example": "example@example.com"
+                    },
+                    "password": {
+                        "description": "User's password",
+                        "type": "string",
+                        "example": "PW*14587"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

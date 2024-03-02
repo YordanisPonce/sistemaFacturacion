@@ -6,12 +6,50 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password as RulesPassword;
 
+
+/**
+ * @OA\Schema(
+ *     title="RegisterRequest",
+ *     description="Request body parameters for register",
+ *     required={"name", "email", "password"}
+ * )
+ */
 class RegisterRequest extends FormRequest
 {
     /**
+     * @OA\Property(
+     *     description="User's name",
+     *     example="John Doe"
+     * )
+     *
+     * @var string
+     */
+    public $name;
+
+    /**
+     * @OA\Property(
+     *     description="User's email",
+     *     example="example@example.com"
+     * )
+     *
+     * @var string
+     */
+    public $email;
+
+    /**
+     * @OA\Property(
+     *     description="User's password",
+     *     example="PW*14587"
+     * )
+     *
+     * @var string
+     */
+    public $password;
+
+    /**
      * Determine if the user is authorized to make this request.
      */
-      /**
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
