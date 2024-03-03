@@ -16,6 +16,11 @@ class UploadHelper
         return $path;
     }
 
+    public static function url($path)
+    {
+        return Storage::url($path);
+    }
+
     public static function remove($path)
     {
         if (is_array($path)) {
@@ -52,6 +57,15 @@ class UploadHelper
         Storage::disk('public')->put($path, base64_decode($image));
 
         return $path;
+    }
+
+    public static function isBase64Encoded($string)
+    { // Check if there is no invalid character in string
+        if (!preg_match('/^(?:[data]{4}:(text|image|application)\/[a-z]*)/', $string)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

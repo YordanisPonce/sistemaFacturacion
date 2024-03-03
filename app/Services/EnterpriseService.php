@@ -55,10 +55,11 @@ class EnterpriseService
 
     public function delete($id): JsonResponse
     {
-        $client = $this->repository->findById($id);
-        throw_if(!$client, 'No se encuentra empresa con el identificador proporcionado');
-        $client->business->delete();
-        $client->delete();
+        $enterprise = $this->repository->findById($id);
+        throw_if(!$enterprise, 'No se encuentra empresa con el identificador proporcionado');
+        $enterprise->taxes()->delete();
+        $enterprise->business->delete();
+        $enterprise->delete();
         return ResponseHelper::ok('Empresa eliminada satisfactoriamente');
     }
 }
