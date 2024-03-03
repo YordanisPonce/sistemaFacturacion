@@ -14,7 +14,10 @@ class EloquentClientRepository implements EloquentClientRepositoryInterface
 
   public function findAll()
   {
-    return $this->model->newQuery()->get();
+    return $this->model->newQuery()
+      ->whereHas('enterprise', function ($query) {
+        $query->where('user_id', auth()->id());
+      })->get();
   }
 
   public function findById($id)

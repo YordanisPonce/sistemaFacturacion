@@ -14,15 +14,23 @@ class TaxRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return match ($this->method()) {
+            "POST" => $this->store(),
+            "PUT" => $this->update(),
+            default => [],
+        };
+
+    }
+
+    public function store()
+    {
+        return ['name' => 'required|string', 'percentage' => 'required|string', 'enterprise_id' => 'required|numeric'];
+    }
+
+    public function update()
+    {
+        return ['name' => 'required|string', 'percentage' => 'required|string', 'enterprise_id' => 'required|numeric'];
     }
 }

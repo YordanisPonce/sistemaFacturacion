@@ -23,10 +23,26 @@ class EnterpriseRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return match ($this->method()) {
+            "POST" => $this->store(),
+            "PUT" => $this->update(),
+            default => [],
+        };
+
     }
+
+    public function store()
+    {
+        return ['coin' => 'string|nullable', 'description' => 'string|nullable'];
+    }
+
+    public function update()
+    {
+        return ['coin' => 'string|nullable', 'description' => 'string|nullable'];
+    }
+
+
+
 
     protected function prepareForValidation()
     {

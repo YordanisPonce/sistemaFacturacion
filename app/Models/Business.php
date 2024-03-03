@@ -15,6 +15,8 @@ class Business extends Model
     protected $table = 'business';
     protected $fillable = ['name', 'address', 'logo', 'phone', 'dni'];
 
+    protected $hidden = ['id'];
+
     protected function logo(): Attribute
     {
         return Attribute::make(

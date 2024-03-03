@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\EloquentBillRepositoryInterface;
 use App\Models\Bill;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class EloquentBillRepository implements EloquentBillRepositoryInterface
 {
@@ -43,6 +44,7 @@ class EloquentBillRepository implements EloquentBillRepositoryInterface
         });
       })
       ->where($filter)
+      ->orderByDesc('created_at')
       ->get();
   }
 

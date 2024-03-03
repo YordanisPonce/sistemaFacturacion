@@ -22,9 +22,22 @@ class CLientRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return match ($this->method()) {
+            "POST" => $this->store(),
+            "PUT" => $this->update(),
+            default => [],
+        };
+
+    }
+
+    public function store()
+    {
+        return ['enterprise_id' => 'required|numeric|exists:enterprises,id'];
+    }
+
+    public function update()
+    {
+        return ['enterprise_id' => 'required|numeric|exists:enterprises,id'];
     }
 
     protected function prepareForValidation()

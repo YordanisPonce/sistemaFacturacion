@@ -26,7 +26,7 @@ class BillRequest extends FormRequest
             "amount" => "required|numeric|min:0",
             "unit_cost" => "required|numeric|min:0",
             "item" => "required|string",
-            "taxes" => "required|array",
+            "taxes" => "nullable|array",
         ];
     }
 
