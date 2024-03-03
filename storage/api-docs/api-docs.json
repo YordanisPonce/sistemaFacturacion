@@ -534,63 +534,6 @@
                         }
                     }
                 ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "name",
-                                    "address",
-                                    "logo",
-                                    "phone",
-                                    "dni",
-                                    "enterprise_id"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "address": {
-                                        "type": "string"
-                                    },
-                                    "logo": {
-                                        "format": "byte"
-                                    },
-                                    "phone": {
-                                        "type": "string"
-                                    },
-                                    "dni": {
-                                        "type": "string"
-                                    },
-                                    "coin": {
-                                        "type": "string"
-                                    },
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "user_id": {
-                                        "type": "string"
-                                    },
-                                    "enterprise_id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object",
-                                "example": {
-                                    "name": "Pepe",
-                                    "address": "Murcia 24/70 Malecon - Habana",
-                                    "logo": "base64....",
-                                    "phone": "+1522469335",
-                                    "dni": "001458796",
-                                    "coin": "USD",
-                                    "description": "Hola esto es una descripcion",
-                                    "enterprise_id": 4
-                                }
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "Empresa registrada satisfactoriamente",
@@ -846,6 +789,71 @@
                         }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "Empresa registrada satisfactoriamente",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/taxes": {
+            "get": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Get taxes",
+                "description": "Get list of taxes",
+                "operationId": "getTaxes",
+                "responses": {
+                    "200": {
+                        "description": "Todos los impuestos",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Create tax",
+                "description": "Create and return one tax",
+                "operationId": "create_tax",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -853,55 +861,192 @@
                             "schema": {
                                 "required": [
                                     "name",
-                                    "address",
-                                    "logo",
-                                    "phone",
-                                    "dni",
-                                    "coin",
-                                    "description",
-                                    "user_id"
+                                    "percentage",
+                                    "enterprise_id"
                                 ],
                                 "properties": {
                                     "name": {
                                         "type": "string"
                                     },
-                                    "address": {
-                                        "type": "string"
+                                    "percentage": {
+                                        "type": "integer"
                                     },
-                                    "logo": {
-                                        "format": "byte"
-                                    },
-                                    "phone": {
-                                        "type": "string"
-                                    },
-                                    "dni": {
-                                        "type": "string"
-                                    },
-                                    "coin": {
-                                        "type": "string"
-                                    },
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "user_id": {
-                                        "type": "string"
+                                    "enterprise_id": {
+                                        "format": "integer"
                                     }
                                 },
                                 "type": "object",
                                 "example": {
                                     "name": "Pepe",
-                                    "address": "Murcia 24/70 Malecon - Habana",
-                                    "logo": "base64....",
-                                    "phone": "+1522469335",
-                                    "dni": "001458796",
-                                    "coin": "USD",
-                                    "description": "Hola esto es una descripcion",
-                                    "user_id": 4
+                                    "percentage": 12,
+                                    "enterprise_id": 4
                                 }
                             }
                         }
                     }
                 },
+                "responses": {
+                    "200": {
+                        "description": "Impuesto creado satisfactoriamente",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/taxes/find-by-enterprise/{enterpriseId}": {
+            "get": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Get taxes by enterrprise",
+                "description": "Get taxes by enterprise id",
+                "operationId": "getByEnterprise",
+                "parameters": [
+                    {
+                        "name": "enterpriseId",
+                        "in": "path",
+                        "description": "Enterprise id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Todos los impuestos",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/taxes/{taxId}": {
+            "put": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Update tax",
+                "description": "Update and return one tax",
+                "operationId": "update_tax",
+                "parameters": [
+                    {
+                        "name": "taxId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "percentage",
+                                    "enterprise_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "percentage": {
+                                        "type": "integer"
+                                    },
+                                    "enterprise_id": {
+                                        "format": "integer"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Pepe",
+                                    "percentage": 12,
+                                    "enterprise_id": 4
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Impuesto creado satisfactoriamente",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Delete tax",
+                "description": "Delete one tax",
+                "operationId": "delete_tax",
+                "parameters": [
+                    {
+                        "name": "taxId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Empresa registrada satisfactoriamente",

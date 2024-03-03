@@ -286,61 +286,6 @@ class ClientController extends Controller
      *           type="integer"
      *      )
      *      ), 
-     *      @OA\RequestBody(
-     *         required=true,
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 required={"name", "address", "logo", "phone", "dni", "enterprise_id"},
-     *                 @OA\Property(
-     *                     property="name",
-     *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="address",
-     *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="logo",
-     *                    format="byte",
-     *                 ),
-     *                 @OA\Property(
-     *                     property="phone",
-     *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="dni",
-     *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="coin",
-     *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="description",
-     *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="user_id",
-     *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="enterprise_id",
-     *                     type="integer"
-     *                 ),
-     *                 example={
-     *                    "name":"Pepe",
-     *                    "address":"Murcia 24/70 Malecon - Habana",
-     *                    "logo":"base64....",
-     *                    "phone":"+1522469335",
-     *                    "dni":"001458796",
-     *                    "coin":"USD", 
-     *                    "description":"Hola esto es una descripcion",
-     *                    "enterprise_id":4,                 }
-     *             )
-     *         )
-     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Empresa registrada satisfactoriamente",

@@ -45,7 +45,8 @@ class EloquentTaxRepository implements EloquentTaxRepositoryInterface
 
   public function findByEnterprise($enterpriseId)
   {
-    Log::debug($enterpriseId);
-    return $this->model->newQuery()->where('enterprise_id', $enterpriseId)->get();
+    return $this->model->newQuery()->whereHas('enterprise', function ($query) use ($enterpriseId) {
+      $query->where('user_id', auth()->id())->whereId($enterpriseId);
+    })->get();
   }
 }

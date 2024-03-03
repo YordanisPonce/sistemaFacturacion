@@ -121,8 +121,9 @@ class BillController extends Controller
      *                  "client_id":4, 
      *                  "amount":124, 
      *                  "item":"Product descripton",
-     *                  "unit_cost":25.54    
-     *           }
+     *                  "unit_cost":25.54,
+     *                  
+     *                      }
      *             )
      *         )
      *     ),

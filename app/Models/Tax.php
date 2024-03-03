@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tax extends Model
@@ -15,5 +16,10 @@ class Tax extends Model
     public function taxes(): BelongsToMany
     {
         return $this->belongsToMany(Tax::class, 'bill_taxes', 'tax_id', 'bill_id');
+    }
+
+    public function enterprise(): BelongsTo
+    {
+        return $this->belongsTo(Enterprise::class);
     }
 }
