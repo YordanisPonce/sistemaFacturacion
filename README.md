@@ -31,8 +31,11 @@ Make sure you have the following prerequisites installed in your development env
 7. Generate an application key:
 ## php artisan key:generate
 
-8. Run the migrations to create the tables in the database:
+8. Create storage link:
+## php artisan storage:link
+
+9. Run the migrations to create the tables in the database:
 ## php artisan migrate
 
-9. Start the Laravel development server:
+10. Start the Laravel development server:
 ## php artisan serve
