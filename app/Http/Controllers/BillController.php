@@ -6,16 +6,17 @@ use App\Helpers\ResponseHelper;
 use App\Http\Requests\BillRequest;
 use App\Services\BillService;
 
-
+/**
+ * @group Bill Management
+ *
+ * APIs for managing bills
+ */
 class BillController extends Controller
 {
     public function __construct(private readonly BillService $service)
     {
         $this->middleware('auth:sanctum');
     }
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         try {
@@ -24,9 +25,7 @@ class BillController extends Controller
             return ResponseHelper::fail($th->getMessage());
         }
     }
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(BillRequest $request)
     {
         try {

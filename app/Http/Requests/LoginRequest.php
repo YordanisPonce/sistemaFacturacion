@@ -8,38 +8,10 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
-/**
- * @OA\Schema(
- *     title="LoginRequest",
- *     description="Request body parameters for login",
- *     required={"email", "password"}
- * )
- */
+
 class LoginRequest extends FormRequest
 {
 
-    /**
-     * @OA\Property(
-     *     description="User's email",
-     *     example="admin@admin.com"
-     * )
-     *
-     * @var string
-     */
-    public $email;
-
-    /**
-     * @OA\Property(
-     *     description="User's password",
-     *     example="Admin*.100"
-     * )
-     *
-     * @var string
-     */
-    public $password;
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;

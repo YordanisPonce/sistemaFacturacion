@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\EloquentTaxRepositoryInterface;
 use App\Models\Tax;
+use Illuminate\Support\Facades\Log;
 
 class EloquentTaxRepository implements EloquentTaxRepositoryInterface
 {
@@ -44,6 +45,7 @@ class EloquentTaxRepository implements EloquentTaxRepositoryInterface
 
   public function findByEnterprise($enterpriseId)
   {
+    Log::debug($enterpriseId);
     return $this->model->newQuery()->where('enterprise_id', $enterpriseId)->get();
   }
 }
