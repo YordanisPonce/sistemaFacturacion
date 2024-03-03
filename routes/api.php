@@ -33,3 +33,10 @@ Route::group(
     ],
     base_path('routes/api/enterprises.php')
 );
+Route::group(
+    [
+        'prefix' => '/taxes'
+    ],
+    base_path('routes/api/enterprises.php')
+);
+
