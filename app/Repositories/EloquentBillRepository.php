@@ -21,17 +21,17 @@ class EloquentBillRepository implements EloquentBillRepositoryInterface
       $enterpriseId = request()->get("enterpriseId");
       $days = request()->get("days");
 
-      if ($clientId) {
+      if ($clientId && is_numeric($clientId)) {
         $query->where("client_id", $clientId);
       }
 
-      if ($enterpriseId) {
+      if ($enterpriseId && is_numeric($enterpriseId)) {
         $query->whereHas("client", function ($subquery) use ($enterpriseId) {
           $subquery->where("enterprise_id", $enterpriseId);
         });
       }
 
-      if (isset ($days)) {
+      if (isset ($days) && is_numeric($clientId)) {
         $startDate = Carbon::today()->subDays($days);
         $query->whereDate('created_at', '>=', $startDate);
       }

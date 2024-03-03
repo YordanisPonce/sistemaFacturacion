@@ -36,7 +36,10 @@ class BillService
         throw_if(!$client, 'No se encuentra cliente para realizar la factura');
 
         $bill = $client->bills()->create($attributes + ['correlative_number' => $this->getCorrelativeNumber($client->enterprise)]);
-        $bill->taxes()->attach($attributes['taxes']);
+        if (isset($attributes['taxes'])) {
+            $bill->taxes()->attach($attributes['taxes']);
+        }
+
 
         return ResponseHelper::ok('Factura creada satisfactoriamente', $bill);
     }
