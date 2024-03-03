@@ -35,7 +35,7 @@ Make sure you have the following prerequisites installed in your development env
 ## php artisan storage:link
 
 9. Run the migrations to create the tables in the database:
-## php artisan migrate
+## php artisan migrate --seed
 
 10. Start the Laravel development server:
 ## php artisan serve
