@@ -13,7 +13,7 @@ class Bill extends Model
     protected $fillable = ['correlative_number', 'client_id', 'amount', 'item', 'unit_cost'];
 
     protected $appends = ['total_price_product', 'total_price_bill'];
-    protected $with = ['taxes'];
+    protected $with = ['taxes', 'client'];
     public function client()
     {
         return $this->belongsTo(Client::class);

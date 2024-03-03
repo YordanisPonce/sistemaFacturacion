@@ -14,9 +14,9 @@ use Illuminate\Http\JsonResponse;
 class BillService
 {
     public function __construct(
-        private readonly EloquentBillRepositoryInterface $repository,
-        private readonly EloquentClientRepositoryInterface $clientRepository,
-        private readonly EloquentTaxRepositoryInterface $taxRepository,
+        private readonly ?EloquentBillRepositoryInterface $repository,
+        private readonly ?EloquentClientRepositoryInterface $clientRepository,
+        private readonly ?EloquentTaxRepositoryInterface $taxRepository,
     ) {
     }
     public function findAll(): JsonResponse
@@ -49,7 +49,7 @@ class BillService
         return ResponseHelper::ok('Factura eliminado satisfactoriamente');
     }
 
-    private function getCorrelativeNumber(Enterprise $enterprise): string
+    public function getCorrelativeNumber(Enterprise $enterprise): string
     {
         $code = ($enterprise->slug ? $enterprise->slug . '-' : '') . strval($enterprise->id) . '-' . strval(Carbon::now()->year);
         return $code;

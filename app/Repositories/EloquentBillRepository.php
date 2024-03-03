@@ -30,13 +30,18 @@ class EloquentBillRepository implements EloquentBillRepositoryInterface
         });
       }
 
-      if (isset($days)) {
+      if (isset ($days)) {
         $startDate = Carbon::today()->subDays($days);
         $query->whereDate('created_at', '>=', $startDate);
       }
     };
 
     return $this->model->newQuery()
+      ->whereHas('client', function ($query) {
+        $query->whereHas('enterprise', function ($subquery) {
+          $subquery->where('user_id', auth()->id());
+        });
+      })
       ->where($filter)
       ->get();
   }

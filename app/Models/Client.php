@@ -12,7 +12,7 @@ class Client extends Model
     use HasFactory;
     protected $fillable = ['enterprise_id', 'business_id'];
 
-    protected $with = ['business'];
+    protected $with = ['business', 'enterprise'];
     public function enterprise(): BelongsTo
     {
         return $this->belongsTo(Enterprise::class);
