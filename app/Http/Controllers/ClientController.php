@@ -13,7 +13,35 @@ class ClientController extends Controller
         $this->middleware('auth:sanctum');
     }
     /**
-     * Display a listing of the resource.
+     * @OA\GET(
+     *      path="/clients",
+     *      operationId="getClients",
+     *      tags={"Clients"},
+     *      security={
+     *      {"sanctum": {}},
+     *      },
+     *      summary="Get users",
+     *      description="Get all clients of the auth user",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Todos los clientes",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *      ),
+     *      )
      */
     public function index()
     {
@@ -24,7 +52,94 @@ class ClientController extends Controller
         }
     }
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *      path="/clients",
+     *      operationId="create_client",
+     *      tags={"Clients"},
+     *      security={
+     *      {"sanctum": {}},
+     *      },
+     *      summary="Create client",
+     *      description="Create and return one client",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"name", "address", "logo", "phone", "dni", "enterprise_id"},
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="address",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="logo",
+     *                    format="byte",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="dni",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="coin",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="description",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="user_id",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="enterprise_id",
+     *                     type="integer"
+     *                 ),
+     *                 example={
+     *                    "name":"Pepe",
+     *                    "address":"Murcia 24/70 Malecon - Habana",
+     *                    "logo":"base64....",
+     *                    "phone":"+1522469335",
+     *                    "dni":"001458796",
+     *                    "coin":"USD", 
+     *                    "description":"Hola esto es una descripcion",
+     *                    "enterprise_id":4,                 }
+     *             )
+     *         )
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Empresa registrada satisfactoriamente",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *      ),
+     *      )
      */
     public function store(CLientRequest $request)
     {
@@ -35,9 +150,7 @@ class ClientController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         try {
@@ -49,7 +162,102 @@ class ClientController extends Controller
 
 
     /**
-     * Update the specified resource in storage.
+     * @OA\PUT(
+     *      path="/clients/{clientId}",
+     *      operationId="update_client",
+     *      tags={"Clients"},
+     *      security={
+     *      {"sanctum": {}},
+     *      },
+     *      summary="Update client",
+     *      description="Update and return one client",
+     *      @OA\Parameter(
+     *      name="clientId",
+     *      in="path",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *      ), 
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"name", "address", "logo", "phone", "dni", "enterprise_id"},
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="address",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="logo",
+     *                    format="byte",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="dni",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="coin",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="description",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="user_id",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="enterprise_id",
+     *                     type="integer"
+     *                 ),
+     *                 example={
+     *                    "name":"Pepe",
+     *                    "address":"Murcia 24/70 Malecon - Habana",
+     *                    "logo":"base64....",
+     *                    "phone":"+1522469335",
+     *                    "dni":"001458796",
+     *                    "coin":"USD", 
+     *                    "description":"Hola esto es una descripcion",
+     *                    "enterprise_id":4,                 }
+     *             )
+     *         )
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Empresa registrada satisfactoriamente",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *      ),
+     *      )
      */
     public function update(CLientRequest $request, string $id)
     {
@@ -61,7 +269,102 @@ class ClientController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\DELETE(
+     *      path="/clients/{clientId}",
+     *      operationId="delete_client",
+     *      tags={"Clients"},
+     *      security={
+     *      {"sanctum": {}},
+     *      },
+     *      summary="Delete client",
+     *      description="Delete one client",
+     *      @OA\Parameter(
+     *      name="clientId",
+     *      in="path",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *      ), 
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"name", "address", "logo", "phone", "dni", "enterprise_id"},
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="address",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="logo",
+     *                    format="byte",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="dni",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="coin",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="description",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="user_id",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="enterprise_id",
+     *                     type="integer"
+     *                 ),
+     *                 example={
+     *                    "name":"Pepe",
+     *                    "address":"Murcia 24/70 Malecon - Habana",
+     *                    "logo":"base64....",
+     *                    "phone":"+1522469335",
+     *                    "dni":"001458796",
+     *                    "coin":"USD", 
+     *                    "description":"Hola esto es una descripcion",
+     *                    "enterprise_id":4,                 }
+     *             )
+     *         )
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Empresa registrada satisfactoriamente",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *      ),
+     *      )
      */
     public function destroy(string $id)
     {

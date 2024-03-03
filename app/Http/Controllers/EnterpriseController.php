@@ -72,7 +72,7 @@ class EnterpriseController extends Controller
      *             mediaType="application/json",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"name", "address", "logo", "phone", "dni", "coin", "description", "user_id"},
+     *                 required={"name", "address", "logo", "phone", "dni", "coin", "description"},
      *                 @OA\Property(
      *                     property="name",
      *                     type="string"
@@ -101,10 +101,6 @@ class EnterpriseController extends Controller
      *                     property="description",
      *                     type="string"
      *                 ),
-     *                 @OA\Property(
-     *                     property="user_id",
-     *                     type="string"
-     *                 ),
      *                 example={
      *                    "name":"Pepe",
      *                    "address":"Murcia 24/70 Malecon - Habana",
@@ -112,8 +108,7 @@ class EnterpriseController extends Controller
      *                    "phone":"+1522469335",
      *                    "dni":"001458796",
      *                    "coin":"USD", 
-     *                    "description":"Hola esto es una descripcion",
-     *                    "user_id":4,                 }
+     *                    "description":"Hola esto es una descripcion"            }
      *             )
      *         )
      *     ),
@@ -172,7 +167,7 @@ class EnterpriseController extends Controller
      *      },
      *      summary="Create enterprise",
      *      description="Update and return one enterprise",
-     *      *      @OA\Parameter(
+     *      @OA\Parameter(
      *      name="enterpriseId",
      *      in="path",
      *      required=true,
@@ -186,7 +181,7 @@ class EnterpriseController extends Controller
      *             mediaType="application/json",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"name", "address", "logo", "phone", "dni", "coin", "description", "user_id"},
+     *                 required={"name", "address", "logo", "phone", "dni", "coin", "description"},
      *                 @OA\Property(
      *                     property="name",
      *                     type="string"
@@ -215,10 +210,6 @@ class EnterpriseController extends Controller
      *                     property="description",
      *                     type="string"
      *                 ),
-     *                 @OA\Property(
-     *                     property="user_id",
-     *                     type="string"
-     *                 ),
      *                 example={
      *                    "name":"Pepe",
      *                    "address":"Murcia 24/70 Malecon - Habana",
@@ -226,8 +217,7 @@ class EnterpriseController extends Controller
      *                    "phone":"+1522469335",
      *                    "dni":"001458796",
      *                    "coin":"USD", 
-     *                    "description":"Hola esto es una descripcion",
-     *                    "user_id":4,                 }
+     *                    "description":"Hola esto es una descripcion",            }
      *             )
      *         )
      *     ),
@@ -265,7 +255,7 @@ class EnterpriseController extends Controller
         }
     }
 
-       /**
+    /**
      * @OA\DELETE(
      *      path="/enterprises/{enterpriseId}",
      *      operationId="delete_enterprise",

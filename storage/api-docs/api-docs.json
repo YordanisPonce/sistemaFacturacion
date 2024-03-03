@@ -161,6 +161,330 @@
                 ]
             }
         },
+        "/clients": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Get users",
+                "description": "Get all clients of the auth user",
+                "operationId": "getClients",
+                "responses": {
+                    "200": {
+                        "description": "Todos los clientes",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Create client",
+                "description": "Create and return one client",
+                "operationId": "create_client",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "address",
+                                    "logo",
+                                    "phone",
+                                    "dni",
+                                    "enterprise_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "logo": {
+                                        "format": "byte"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "dni": {
+                                        "type": "string"
+                                    },
+                                    "coin": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "string"
+                                    },
+                                    "enterprise_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Pepe",
+                                    "address": "Murcia 24/70 Malecon - Habana",
+                                    "logo": "base64....",
+                                    "phone": "+1522469335",
+                                    "dni": "001458796",
+                                    "coin": "USD",
+                                    "description": "Hola esto es una descripcion",
+                                    "enterprise_id": 4
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Empresa registrada satisfactoriamente",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/clients/{clientId}": {
+            "put": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Update client",
+                "description": "Update and return one client",
+                "operationId": "update_client",
+                "parameters": [
+                    {
+                        "name": "clientId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "address",
+                                    "logo",
+                                    "phone",
+                                    "dni",
+                                    "enterprise_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "logo": {
+                                        "format": "byte"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "dni": {
+                                        "type": "string"
+                                    },
+                                    "coin": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "string"
+                                    },
+                                    "enterprise_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Pepe",
+                                    "address": "Murcia 24/70 Malecon - Habana",
+                                    "logo": "base64....",
+                                    "phone": "+1522469335",
+                                    "dni": "001458796",
+                                    "coin": "USD",
+                                    "description": "Hola esto es una descripcion",
+                                    "enterprise_id": 4
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Empresa registrada satisfactoriamente",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Delete client",
+                "description": "Delete one client",
+                "operationId": "delete_client",
+                "parameters": [
+                    {
+                        "name": "clientId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "address",
+                                    "logo",
+                                    "phone",
+                                    "dni",
+                                    "enterprise_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "logo": {
+                                        "format": "byte"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "dni": {
+                                        "type": "string"
+                                    },
+                                    "coin": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "string"
+                                    },
+                                    "enterprise_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Pepe",
+                                    "address": "Murcia 24/70 Malecon - Habana",
+                                    "logo": "base64....",
+                                    "phone": "+1522469335",
+                                    "dni": "001458796",
+                                    "coin": "USD",
+                                    "description": "Hola esto es una descripcion",
+                                    "enterprise_id": 4
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Empresa registrada satisfactoriamente",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/enterprises": {
             "get": {
                 "tags": [
@@ -211,8 +535,7 @@
                                     "phone",
                                     "dni",
                                     "coin",
-                                    "description",
-                                    "user_id"
+                                    "description"
                                 ],
                                 "properties": {
                                     "name": {
@@ -235,9 +558,6 @@
                                     },
                                     "description": {
                                         "type": "string"
-                                    },
-                                    "user_id": {
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object",
@@ -248,8 +568,7 @@
                                     "phone": "+1522469335",
                                     "dni": "001458796",
                                     "coin": "USD",
-                                    "description": "Hola esto es una descripcion",
-                                    "user_id": 4
+                                    "description": "Hola esto es una descripcion"
                                 }
                             }
                         }
@@ -312,8 +631,7 @@
                                     "phone",
                                     "dni",
                                     "coin",
-                                    "description",
-                                    "user_id"
+                                    "description"
                                 ],
                                 "properties": {
                                     "name": {
@@ -336,9 +654,6 @@
                                     },
                                     "description": {
                                         "type": "string"
-                                    },
-                                    "user_id": {
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object",
@@ -349,8 +664,7 @@
                                     "phone": "+1522469335",
                                     "dni": "001458796",
                                     "coin": "USD",
-                                    "description": "Hola esto es una descripcion",
-                                    "user_id": 4
+                                    "description": "Hola esto es una descripcion"
                                 }
                             }
                         }
