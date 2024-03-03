@@ -26,11 +26,11 @@ class TaxRequest extends FormRequest
 
     public function store()
     {
-        return ['name' => 'required|string', 'percentage' => 'required|string', 'enterprise_id' => 'required|numeric'];
+        return ['name' => 'required|string', 'percentage' => 'required|numeric', 'enterprise_id' => 'required|numeric'];
     }
 
     public function update()
     {
-        return ['name' => 'required|string', 'percentage' => 'required|string', 'enterprise_id' => 'required|numeric'];
+        return ['name' => 'required|string', 'percentage' => 'required|numeric', 'enterprise_id' => 'required|numeric'];
     }
 }

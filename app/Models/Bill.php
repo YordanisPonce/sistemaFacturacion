@@ -31,7 +31,7 @@ class Bill extends Model
 
     public function getTotalPriceBillAttribute(): float
     {
-        $taxes = $this->taxes()->sum(DB::raw('percentage/100'));
+        $taxes = $this->taxes()->sum(DB::raw('(percentage/100) * ' . strval($this->total_price_product)));
         return $this->total_price_product + $taxes;
     }
 }
