@@ -30,4 +30,9 @@ class Enterprise extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function bills(): HasMany
+    {
+        return $this->hasMany(Bill::class);
+    }
+
 }

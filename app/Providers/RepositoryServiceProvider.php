@@ -37,6 +37,11 @@ class RepositoryServiceProvider extends ServiceProvider
 			\App\Interfaces\EloquentTaxRepositoryInterface::class,
 			\App\Repositories\EloquentTaxRepository::class
 		);
+
+		$this->app->bind(
+			\App\Interfaces\EloquentBillRepositoryInterface::class,
+			\App\Repositories\EloquentBillRepository::class
+		);
     }
 
     /**

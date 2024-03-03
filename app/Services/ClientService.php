@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Helpers\ResponseHelper;
 use App\Interfaces\EloquentClientRepositoryInterface;
+use App\Interfaces\EloquentEnterpriseRepositoryInterface;
 use App\Repositories\EloquentBusinessRepository;
 use Illuminate\Http\JsonResponse;
 
@@ -11,6 +12,7 @@ class ClientService
 {
     public function __construct(
         private readonly EloquentClientRepositoryInterface $repository,
+        private readonly EloquentEnterpriseRepositoryInterface $enterpriseRepository,
         private readonly EloquentBusinessRepository $businessRepository
     ) {
     }
@@ -27,6 +29,9 @@ class ClientService
 
     public function save(array $attributes): JsonResponse
     {
+        $enterprise = $this->enterpriseRepository->findById($attributes['enterprise_id']);
+        throw_if(!$enterprise, 'No se encuentra empresa con el identificador proporcionado');
+        
         $business = $this->businessRepository->save($attributes);
         $client = $this->repository->save($attributes + [
             'business_id' => $business->id

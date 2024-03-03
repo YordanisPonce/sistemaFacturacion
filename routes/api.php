@@ -39,4 +39,11 @@ Route::group(
     ],
     base_path('routes/api/taxes.php')
 );
+Route::group(
+    [
+        'prefix' => '/bills'
+    ],
+    base_path('routes/api/bills.php')
+);
+
 
