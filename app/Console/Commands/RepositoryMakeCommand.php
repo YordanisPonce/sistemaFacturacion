@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use app\Console\Commands\Traits\ServiceProviderInjector;
+use app\Console\Commands\traits\ServiceProviderInjector;
 use Illuminate\Console\Command;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\Artisan;
